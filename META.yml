@@ -23,4 +23,4 @@ requires:
   Test::Kwalitee: 0
   Test::More: 0.82
   Test::NoWarnings: 0
-version: 0.02
+version: 0.03

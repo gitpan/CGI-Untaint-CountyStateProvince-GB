@@ -2,10 +2,9 @@ package CGI::Untaint::CountyStateProvince::GB;
 
 use warnings;
 use strict;
-use Carp;
-use CGI::Untaint;
 
-use base qw(CGI::Untaint::object CGI::Untaint::CountyStateProvince);
+# use base qw(CGI::Untaint::object CGI::Untaint::CountyStateProvince);
+use base qw(CGI::Untaint::object);
 
 =head1 NAME
 
@@ -13,11 +12,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -112,7 +111,7 @@ our %counties = (
 	'worcestershire' => 1,
 );
 
-my %sloppies = (
+our %sloppies = (
 	'beds' => 'bedfordshire',
 	'cambs' => 'cambridgeshire',
 	'co durham' => 'county durham',
@@ -163,41 +162,18 @@ NB, unlike CGI::Untaint->is_valid(), this takes an argument.
 sub is_valid {
 	my ($self, $value) = @_;
 
-	# $value = $self->value;	# FIXME
+	# $value = lc($self->value);	# FIXME, why doesn't this work?
 	$value = lc($value);
 
 	if(exists($sloppies{$value})) {
-		$self->value($sloppies{$value});
-		return 1;
+		return $sloppies{$value};
 	}
 
-	return exists($counties{$value});
-}
-
-# sub _untaint_re {
-	# return CGI::Untaint::CountyStateProvince::_untaint_re();
-# }
-
-=head2 new
-
-Used internally to add the table. Do not call this yourself.
-
-=cut
-
-sub new {
-	my $proto = shift;
-
-	my $class = ref($proto) || $proto;
-
-	my $self = CGI::Untaint->new();
-
-	bless $self, $class;
-
-	return $self;
+	return exists($counties{$value}) ? $value : 0;
 }
 
 BEGIN {
-	my $gb = CGI::Untaint::CountyStateProvince::GB->new();
+	my $gb = CGI::Untaint::CountyStateProvince::GB->_new();
 
 	push @CGI::Untaint::CountyStateProvince::countries, $gb;
 };

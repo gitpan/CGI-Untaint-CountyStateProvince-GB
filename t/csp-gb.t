@@ -19,13 +19,13 @@ my $c = $untainter->extract(-as_CountyStateProvince => 'state1');
 ok(!defined($c), 'Maryland');
 
 $c = $untainter->extract(-as_CountyStateProvince => 'state2');
-ok($c eq 'Kent', 'Kent');
+ok($c eq 'kent', 'Kent');
 
 $c = $untainter->extract(-as_CountyStateProvince => 'state3');
 ok(!defined($c), 'Empty');
 
 $c = $untainter->extract(-as_CountyStateProvince => 'state4');
-ok($c eq 'West Yorkshire', 'West Yorkshire');
+ok($c eq 'west yorkshire', 'West Yorkshire');
 
 $c = $untainter->extract(-as_CountyStateProvince => 'state5');
-ok($c eq 'West Yorks', 'West Yorks');
+ok($c eq 'west yorkshire', 'West Yorks');

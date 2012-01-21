@@ -8,4 +8,4 @@ BEGIN {
 ";
 }
 
-diag( "Testing CGI::Untaint::CountyStateProvince::GB $CGI::Untaint::CountyStateProvince::VERSION, Perl $], $^X" );
+diag( "Testing CGI::Untaint::CountyStateProvince::GB $CGI::Untaint::CountyStateProvince::GB::VERSION, Perl $], $^X" );
