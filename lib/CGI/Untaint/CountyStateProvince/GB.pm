@@ -12,11 +12,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -78,7 +78,7 @@ our %counties = (
 	'merioneth' => 1,
 	'merseyside' => 1,
 	'mid lothian' => 1,
-	'middlesex' => 1,
+	'middlesex' => 1,	# Doesn't exist anymore, but people like it
 	'monmouthshire' => 1,
 	'montgomeryshire' => 1,
 	'north yorkshire' => 1,
@@ -111,7 +111,7 @@ our %counties = (
 	'worcestershire' => 1,
 );
 
-our %sloppies = (
+our %abbreviations = (
 	'beds' => 'bedfordshire',
 	'cambs' => 'cambridgeshire',
 	'co durham' => 'county durham',
@@ -119,10 +119,12 @@ our %sloppies = (
 	'glasgow' => 'west lothian',
 	'gloucester' => 'gloucestershire',
 	'greater london' => 'london',
+	'hants' => 'hampshire',
 	'herts' => 'hertfordshire',
 	'lancs' => 'lancashire',
 	'middx' => 'middlesex',
 	'n yorkshire' => 'north yorkshire',
+	'northants' => 'northamptonshire',
 	'notts' => 'nottinghamshire',
 	'oxon' => 'oxfordshire',
 	'greater manchester' => 'manchester',
@@ -165,8 +167,8 @@ sub is_valid {
 	# $value = lc($self->value);	# FIXME, why doesn't this work?
 	$value = lc($value);
 
-	if(exists($sloppies{$value})) {
-		return $sloppies{$value};
+	if(exists($abbreviations{$value})) {
+		return $abbreviations{$value};
 	}
 
 	return exists($counties{$value}) ? $value : 0;
