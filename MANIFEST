@@ -23,4 +23,3 @@ t/spelling.t
 t/vars.t
 META.yml                                 Module meta-data (added by MakeMaker)
 MYMETA.json
-META.json                                Module JSON meta-data (added by MakeMaker)

@@ -12,11 +12,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -166,6 +166,12 @@ sub is_valid {
 
 	# $value = lc($self->value);	# FIXME, why doesn't this work?
 	$value = lc($value);
+
+	if($value =~ /([a-z\s]+)/) {
+		$value = $1;
+	} else {
+		return 0;
+	}
 
 	if(exists($abbreviations{$value})) {
 		return $abbreviations{$value};

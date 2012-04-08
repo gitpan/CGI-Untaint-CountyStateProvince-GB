@@ -1,5 +1,8 @@
 Revision history for CGI-Untaint-CountyStateProvince-GB
 
+0.05	Sun Apr  8 04:20:24 BST 2012
+	Added t/taint.t and fixed an untainting problem it showed
+
 0.04	Wed Mar 21 13:31:39 EDT 2012
 	Added northants and hants as abbreviations
 	Only do kwalitee test in author environment because it throws too
