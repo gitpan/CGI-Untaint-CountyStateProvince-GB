@@ -1,6 +1,6 @@
 #!perl -wT
 
-use Test::More tests => 7;
+use Test::More tests => 8;
 BEGIN {
 	use_ok('CGI::Untaint');
 	use_ok('CGI::Untaint::CountyStateProvince::GB');
@@ -12,6 +12,7 @@ my $vars = {
     state3 => ' ',
     state4 => 'West Yorkshire',
     state5 => 'West Yorks',
+    state6 => '*&^',
 };
 
 my $untainter = CGI::Untaint->new($vars);
@@ -29,3 +30,6 @@ ok($c eq 'west yorkshire', 'West Yorkshire');
 
 $c = $untainter->extract(-as_CountyStateProvince => 'state5');
 ok($c eq 'west yorkshire', 'West Yorks');
+
+$c = $untainter->extract(-as_CountyStateProvince => 'state6');
+ok(!defined($c), '*&^');

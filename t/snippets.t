@@ -14,6 +14,10 @@ eval "use Test::Pod::Snippets";
 if($@) {
 	plan skip_all => 'Test::Pod::Snippets required for testing POD code snippets';
 } else {
+	# Prevent CGI::Info from reading from STDIN, which hangs the test
+	$ENV{'GATEWAY_INTERFACE'} = 1;
+	$ENV{'REQUEST_METHOD'} = 'HEAD';
+
 	my $tps = Test::Pod::Snippets->new;
 
 	my @modules = qw/ CGI::Untaint::CountyStateProvince::GB /;

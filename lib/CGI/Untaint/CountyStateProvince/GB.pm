@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 # use base qw(CGI::Untaint::object CGI::Untaint::CountyStateProvince);
-use base qw(CGI::Untaint::object);
+use base 'CGI::Untaint::object';
 
 =head1 NAME
 
@@ -12,11 +12,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -138,8 +138,8 @@ our %abbreviations = (
 Adds a list of British counties to the list of counties/state/provinces
 which are known by the CGI::Untaint::CountyStateProvince validator.
 
-You must include CGI::Untaint::CountyStateProvince::GB after including CGI::Untaint, otherwise
-it won't work.
+You must include CGI::Untaint::CountyStateProvince::GB after including
+CGI::Untaint, otherwise it won't work.
 
     use CGI::Info;
     use CGI::Untaint;
@@ -156,16 +156,14 @@ it won't work.
 
 =head2 is_valid
 
-Validates the data.
-NB, unlike CGI::Untaint->is_valid(), this takes an argument.
+Validates the data. See L<CGI::Untaint::is_valid>.
 
 =cut
 
 sub is_valid {
 	my ($self, $value) = @_;
 
-	# $value = lc($self->value);	# FIXME, why doesn't this work?
-	$value = lc($value);
+	$value = lc($self->value);	# FIXME, why doesn't this work?
 
 	if($value =~ /([a-z\s]+)/) {
 		$value = $1;
@@ -178,6 +176,23 @@ sub is_valid {
 	}
 
 	return exists($counties{$value}) ? $value : 0;
+}
+
+=head2 value
+
+Sets the raw data which is to be validated.  Called by the superclass, you
+are unlikely to want to call it.
+
+=cut
+
+sub value {
+	my ($self, $value) = @_;
+
+	if(defined($value)) {
+		$self->{value} = $value;
+	}
+
+	return $self->{value};
 }
 
 BEGIN {
@@ -243,4 +258,4 @@ This program is released under the following licence: GPL
 
 =cut
 
-1; # End of CGI::Untaint::CountyStateProvince-GB
+1; # End of CGI::Untaint::CountyStateProvince::GB

@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               CGI-Untaint-CountyStateProvince-GB
-version:            0.05
+version:            0.06
 abstract:           Add British counties to CGI::Untaint::CountyStateProvince tables
 author:
     - Nigel Horne <njh@bandsman.co.uk>
