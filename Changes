@@ -1,5 +1,9 @@
 Revision history for CGI-Untaint-CountyStateProvince-GB
 
+0.07	Sun Apr 15 11:42:55 BST 2012
+	Fix t/taint.t and t/untaint.t on systems without Test::Taint and/or
+		Test::Untaint
+
 0.06	Sat Apr 14 14:17:33 BST 2012
 	is_valid() no longer takes an argument
 	Added extra trivial tests to t/csp-gb.t and t/taint.t

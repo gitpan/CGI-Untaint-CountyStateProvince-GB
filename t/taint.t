@@ -2,16 +2,17 @@
 
 use strict;
 use warnings;
-
-use Test::More tests => 12;
-
-use_ok('CGI::Untaint');
-use_ok('CGI::Untaint::CountyStateProvince::GB');
+use Test::More;
 
 eval 'use Test::Taint';
 if($@) {
 	plan skip_all => 'Test::Taint required for testing untainting';
 } else {
+	plan tests => 12;
+
+	use_ok('CGI::Untaint');
+	use_ok('CGI::Untaint::CountyStateProvince::GB');
+
 	my $vars = {
 	    state1 => 'Kent',
 	    state2 => 'West Yorkshire',
