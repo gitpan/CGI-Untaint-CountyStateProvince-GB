@@ -17,6 +17,7 @@ WriteMakefile(
 	'CGI::Untaint::CountyStateProvince' => 0.04,
 	'Test::NoWarnings' => 0,
 	'Test::Kwalitee' => 0,
+	'Locale::SubCountry' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'CGI-Untaint-CountyStateProvince-GB*' },

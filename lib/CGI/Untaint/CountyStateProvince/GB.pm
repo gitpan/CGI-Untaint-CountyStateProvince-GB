@@ -2,6 +2,7 @@ package CGI::Untaint::CountyStateProvince::GB;
 
 use warnings;
 use strict;
+use Locale::SubCountry;
 
 # use base qw(CGI::Untaint::object CGI::Untaint::CountyStateProvince);
 use base 'CGI::Untaint::object';
@@ -12,11 +13,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -115,6 +116,7 @@ our %abbreviations = (
 	'beds' => 'bedfordshire',
 	'cambs' => 'cambridgeshire',
 	'co durham' => 'county durham',
+	'durham' => 'county durham',
 	'east yorks' => 'east yorkshire',
 	'glasgow' => 'west lothian',
 	'gloucester' => 'gloucestershire',
@@ -136,7 +138,8 @@ our %abbreviations = (
 =head1 SYNOPSIS
 
 Adds a list of British counties to the list of counties/state/provinces
-which are known by the CGI::Untaint::CountyStateProvince validator.
+which are known by the CGI::Untaint::CountyStateProvince validator so that
+an HTML form sent by CGI contains a valid county.
 
 You must include CGI::Untaint::CountyStateProvince::GB after including
 CGI::Untaint, otherwise it won't work.
@@ -156,14 +159,14 @@ CGI::Untaint, otherwise it won't work.
 
 =head2 is_valid
 
-Validates the data. See L<CGI::Untaint::is_valid>.
+Validates the data. See CGI::Untaint::is_valid.
 
 =cut
 
 sub is_valid {
-	my ($self, $value) = @_;
+	my $self = shift;
 
-	$value = lc($self->value);	# FIXME, why doesn't this work?
+	my $value = lc($self->value);
 
 	if($value =~ /([a-z\s]+)/) {
 		$value = $1;
@@ -173,6 +176,21 @@ sub is_valid {
 
 	if(exists($abbreviations{$value})) {
 		return $abbreviations{$value};
+	}
+
+	# Try using Locale::SubCountry first, but be aware of RT77735 - some counties are missing and
+	# some towns are listed as counties.
+	unless($self->{_validator}) {
+		$self->{_validator} = Locale::SubCountry->new('GB');
+	}
+
+	unless($self->{_validator}) {
+		return 0;
+	}
+
+	my $county = $self->{_validator}->code($value);
+	if($county && ($county ne 'unknown')) {
+		return $value;
 	}
 
 	return exists($counties{$value}) ? $value : 0;
@@ -220,7 +238,7 @@ CGI::Untaint::CountyStateProvince, CGI::Untaint
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc CGI::Untaint::CountyStateProvince::GB
+	perldoc CGI::Untaint::CountyStateProvince::GB
 
 
 You can also look for information at:
