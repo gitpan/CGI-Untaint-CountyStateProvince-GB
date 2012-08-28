@@ -10,6 +10,7 @@ t/coverage.t
 t/critic.t
 t/csp-gb.t
 t/cv.t
+t/dist.t
 t/gv.t
 t/kwalitee.t
 t/manifest.t
@@ -23,6 +24,7 @@ t/snippets.t
 t/spelling.t
 t/taint.t
 t/untaint.t
+t/unused.t
 t/vars.t
 META.yml                                 Module meta-data (added by MakeMaker)
 MYMETA.json

@@ -34,13 +34,14 @@
          "requires" : {
             "CGI::Untaint" : "0",
             "CGI::Untaint::CountyStateProvince" : "0.04",
+            "Carp" : "0",
             "Locale::SubCountry" : "0",
-            "Test::Kwalitee" : "0",
             "Test::More" : "0.82",
-            "Test::NoWarnings" : "0"
+            "Test::NoWarnings" : "0",
+            "Test::Requires" : "0"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.08"
+   "version" : "0.09"
 }

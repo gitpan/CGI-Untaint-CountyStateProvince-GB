@@ -1,6 +1,9 @@
 Revision history for CGI-Untaint-CountyStateProvince-GB
 
-0.08
+0.09	Tue Aug 28 08:31:51 BST 2012
+	Cleveland is no longer a county. Accept Teesside instead.
+
+0.08	Mon Jul 16 20:21:06 BST 2012
 	Added mapping of Durham to County Durham
 
 0.07	Sun Apr 15 11:42:55 BST 2012

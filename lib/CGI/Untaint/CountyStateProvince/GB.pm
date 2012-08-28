@@ -3,6 +3,7 @@ package CGI::Untaint::CountyStateProvince::GB;
 use warnings;
 use strict;
 use Locale::SubCountry;
+use Carp;
 
 # use base qw(CGI::Untaint::object CGI::Untaint::CountyStateProvince);
 use base 'CGI::Untaint::object';
@@ -13,11 +14,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -41,7 +42,6 @@ our %counties = (
 	'channel islands' => 1,
 	'cheshire' => 1,
 	'clackmannanshire' => 1,
-	'cleveland' => 1,
 	'clywd' => 1,
 	'county durham' => 1,
 	'county tyrone' => 1,
@@ -101,6 +101,7 @@ our %counties = (
 	'suffolk' => 1,
 	'surrey' => 1,
 	'tayside' => 1,
+	'teesside' => 1,
 	'tyne and wear' => 1,
 	'warwickshire' => 1,
 	'west dunbartonshire' => 1,
@@ -115,6 +116,7 @@ our %counties = (
 our %abbreviations = (
 	'beds' => 'bedfordshire',
 	'cambs' => 'cambridgeshire',
+	'cleveland' => 'teesside',
 	'co durham' => 'county durham',
 	'durham' => 'county durham',
 	'east yorks' => 'east yorkshire',
@@ -178,14 +180,13 @@ sub is_valid {
 		return $abbreviations{$value};
 	}
 
-	# Try using Locale::SubCountry first, but be aware of RT77735 - some counties are missing and
-	# some towns are listed as counties.
+	# Try using Locale::SubCountry first, but be aware of RT77735 - some
+	# counties are missing and some towns are listed as counties.
 	unless($self->{_validator}) {
 		$self->{_validator} = Locale::SubCountry->new('GB');
-	}
-
-	unless($self->{_validator}) {
-		return 0;
+		unless($self->{_validator}) {
+			carp 'Can\'t instantiate Locale::SubCountry';
+		}
 	}
 
 	my $county = $self->{_validator}->code($value);
