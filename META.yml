@@ -1,28 +1,28 @@
----
-abstract: 'Add British counties to CGI::Untaint::CountyStateProvince tables'
+--- #YAML:1.0
+name:               CGI-Untaint-CountyStateProvince-GB
+version:            0.10
+abstract:           Add British counties to CGI::Untaint::CountyStateProvince tables
 author:
-  - 'Nigel Horne <njh@bandsman.co.uk>'
-build_requires:
-  ExtUtils::MakeMaker: 0
+    - Nigel Horne <njh@bandsman.co.uk>
+license:            GPL
+distribution_type:  module
 configure_requires:
-  ExtUtils::MakeMaker: 0
-dynamic_config: 1
-generated_by: 'ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.120921'
-license: open_source
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
-name: CGI-Untaint-CountyStateProvince-GB
-no_index:
-  directory:
-    - t
-    - inc
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
 requires:
-  CGI::Untaint: 0
-  CGI::Untaint::CountyStateProvince: 0.04
-  Carp: 0
-  Locale::SubCountry: 0
-  Test::More: 0.82
-  Test::NoWarnings: 0
-  Test::Requires: 0
-version: 0.09
+    Carp:                 0
+    CGI::Untaint:         0
+    CGI::Untaint::CountyStateProvince:  0.04
+    Locale::SubCountry:   0
+    Test::More:           0.82
+    Test::NoWarnings:     0
+    Test::Requires:       0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.57_05
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
