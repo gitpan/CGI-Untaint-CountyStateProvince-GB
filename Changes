@@ -1,5 +1,9 @@
 Revision history for CGI-Untaint-CountyStateProvince-GB
 
+0.11	Sun Dec 30 17:01:14 EST 2012
+	Added t/strict.t
+	Handle westmidlands without a space, mapping to West Midlands
+
 0.10	Wed Oct 31 13:47:02 GMT 2012
 	Added t/unused.t and t/changes.t
 

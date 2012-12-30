@@ -14,11 +14,11 @@ CGI::Untaint::CountyStateProvince::GB - Add British counties to CGI::Untaint::Co
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =cut
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 our %counties = (
 	'aberdeenshire' => 1,
@@ -133,6 +133,7 @@ our %abbreviations = (
 	'oxon' => 'oxfordshire',
 	'greater manchester' => 'manchester',
 	's yorkshire' => 'south yorkshire',
+	'westmidlands' => 'west midlands',
 	'west mids' => 'west midlands',
 	'west yorks' => 'west yorkshire',
 );
